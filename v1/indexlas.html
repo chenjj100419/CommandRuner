@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta lang="zh">
+        <meta charset="utf-8">
+        <title>在线命令执行 CommandOnlineRuner</title>
+        <link rel="stylesheet" href="/style.css">
+        <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+    </head>
+    <body>
+        <div class="input_box">
+            <h1>在线命令执行</h1>
+            <form action="/cmd.php" method="post" accept-charset="utf-8" id="cform">
+                <input type="text" placeholder="CMD命令" name="CmdCommand">
+                <input type="submit" value="提交CMD" id="csub">
+            </form>
+            <script>
+                $("#csub").click(function () {
+                    $("#cform").ajaxSubmit(function (data) {
+                        alert(data.Message);
+                    });
+                });
+            </script>
+            <from action="/powershell.php" method="post" accept-charset="utf-8" id="psform">
+                <input type="text" placeholder="PowerShell命令" name="PowerShellCommand">
+                <input type="submit" value="提交PowerShell" id="pssub">
+            </from>
+            <script>
+                $("#pssub").click(function () {
+                    $("#psform").ajaxSubmit(function (data) {
+                        alert(data.Message);
+                    });
+                });
+            </script>
+        </div>
+    </body>
+</html>

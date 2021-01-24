@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" lang="zh-Hans">
+        <title>在线命令执行 CommandOnlineRuner</title>
+        <link rel="stylesheet" href="/style.css">
+        <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+    </head>
+    <body>
+        <div class="input_box">
+            <h1>在线命令执行</h1>
+            <input type="text" placeholder="命令" id="command">
+            <input type="submit" value="提交" id="sub">
+            <textarea placeholder="返回值" id="resultB"></textarea>
+            <script>
+                $(function() {
+                    $('#sub').click(function() {
+                        $.ajaxSetup({
+                            contentType: "application/x-www-form-urlencoded; charset=utf-8"
+                        });
+                        console.log(document.getElementById('command').value);
+                        try{
+                            $.post(
+                                '/v1/command.php',
+                                {
+                                    command: document.getElementById('command').value
+                                },
+                                function(result) {
+                                    //alert(result);
+                                    resultDoc = document.getElementById('resultB');
+                                    resultDoc.value=resultDoc.value+result+'\r\n';
+                                }
+                            );
+                        }catch(error){
+                            resultDoc = document.getElementById('resultB');
+                            resultDoc.value=resultDoc.value+'错误: '+error.Message+'\r\n';
+                        }
+                    });
+                });
+            </script>
+        </div>
+    </body>
+</html>
